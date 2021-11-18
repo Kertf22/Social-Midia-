@@ -1,14 +1,16 @@
 const GetAllPostsService = require("../service/GetAllPostsService.js");
 
-
 class GetAllPostsController{
     async handle(req,res) {
-        const getAllPostsService = new GetAllPostsService()
+        const getAllPostsService = new GetAllPostsService();
 
-        const post = await getAllPostsService.execute();
+        const { _page ,_limit } = req.query;
 
-        return res.json(post)
+        const post = await getAllPostsService.execute({_page:parseInt(_page) ,_limit:parseInt(_limit)});
+
+        return res.json(post);
     }
 }
 
 module.exports = GetAllPostsController
+

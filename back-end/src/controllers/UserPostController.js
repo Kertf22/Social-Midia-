@@ -5,8 +5,13 @@ class UserPostController {
     async handle(req,res){
         const userPostService = new UserPostService();
 
+        const { id } = req.params;
+        const { _page ,_limit } = req.query;
+        
         const post = await userPostService.execute({
-            user_id:req.user_id
+            user_id:id,
+            _page:parseInt(_page) ,
+            _limit:parseInt(_limit)
         })
 
         return res.json(post)
